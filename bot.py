@@ -2,6 +2,8 @@
 # [⚠️ Do not change this repo link ⚠️] :- https://github.com/LISA-KOREA/UPLOADER-BOT-V4
 
 import os
+import threading
+from flask import Flask
 from plugins.config import Config
 from pyrogram import Client
 import logging
@@ -13,6 +15,21 @@ logger = logging.getLogger(__name__)
 logging.getLogger('pymongo').setLevel(logging.WARNING)
 logging.getLogger("aiosqlite").setLevel(logging.WARNING)
 logging.getLogger("requests_cache").setLevel(logging.WARNING)
+
+# ─── Flask keep-alive server for Render ───────────────────────────────────────
+flask_app = Flask(__name__)
+
+@flask_app.route('/')
+def index():
+    return 'Bot is running!'
+
+def run_flask():
+    port = int(os.environ.get("PORT", 8000))
+    flask_app.run(host="0.0.0.0", port=port)
+
+# Start Flask in background thread so Render detects open port
+threading.Thread(target=run_flask, daemon=True).start()
+# ─────────────────────────────────────────
 
 if __name__ == "__main__":
 
