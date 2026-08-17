@@ -73,7 +73,7 @@ async def get_verify_shorted_link(link):
 async def check_token(bot, userid, token):
     user = await bot.get_users(userid)
     if not await db.is_user_exist(user.id):
-        await db.add_user(user.id, user.first_name)
+        await db.add_user(user.id)
         await bot.send_message(Config.LOG_CHANNEL, LOG_TEXT_P.format(user.id, user.mention))
     if user.id in TOKENS.keys():
         TKN = TOKENS[user.id]
@@ -89,7 +89,7 @@ async def check_token(bot, userid, token):
 async def get_token(bot, userid, link):
     user = await bot.get_users(userid)
     if not await db.is_user_exist(user.id):
-        await db.add_user(user.id, user.first_name)
+        await db.add_user(user.id)
         await bot.send_message(Config.LOG_CHANNEL, LOG_TEXT_P.format(user.id, user.mention))
     token = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
     TOKENS[user.id] = {token: False}
@@ -100,7 +100,7 @@ async def get_token(bot, userid, link):
 async def verify_user(bot, userid, token):
     user = await bot.get_users(userid)
     if not await db.is_user_exist(user.id):
-        await db.add_user(user.id, user.first_name)
+        await db.add_user(user.id)
         await bot.send_message(Config.LOG_CHANNEL, LOG_TEXT_P.format(user.id, user.mention))
     TOKENS[user.id] = {token: True}
     tz = pytz.timezone('Asia/Kolkata')
@@ -110,7 +110,7 @@ async def verify_user(bot, userid, token):
 async def check_verification(bot, userid):
     user = await bot.get_users(userid)
     if not await db.is_user_exist(user.id):
-        await db.add_user(user.id, user.first_name)
+        await db.add_user(user.id)
         await bot.send_message(Config.LOG_CHANNEL, LOG_TEXT_P.format(user.id, user.mention))
     tz = pytz.timezone('Asia/Tokyo')
     today = date.today()
