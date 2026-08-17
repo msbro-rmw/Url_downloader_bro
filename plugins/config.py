@@ -39,6 +39,7 @@ class Config(object):
     )
 
     DATABASE_URL = os.environ.get("DATABASE_URL", "mongodb+srv://devms786178_db_user:cEtMdLjmHF5EM2Pf@cluster0.xbqyvnn.mongodb.net/?appName=Cluster0")
+    DATABASE_NAME = os.environ.get("DATABASE_NAME", "UrlDownloaderBot")
 
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1003880226408"))
     LOGGER = logging
