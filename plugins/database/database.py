@@ -72,4 +72,4 @@ class Database:
         return user or None
 
 
-db = Database(Config.DATABASE_URL, "UploaderXNTBot")
+db = Database(Config.DATABASE_URL, "mongodb+srv://msbro1099_db_user:msbro786178@cluster0.mrfafaz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
